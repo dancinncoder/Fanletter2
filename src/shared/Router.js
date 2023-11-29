@@ -9,21 +9,32 @@ import Auth from "pages/Auth";
 function Router() {
   const [isLogin, setIsLogin] = useState(false);
   return (
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route
+    //       path="auth/*"
+    //       element={<Auth isLogin={isLogin} setIsLogin={setIsLogin} />}
+    //     />
+    //     {isLogin ? (
+    //       <>
+    //         <Route path="/" element={<Home />} />
+    //         <Route path="letter-details/:id" element={<LetterDetails />} />
+    //         <Route path="profile" element={<Profile />} />
+    //       </>
+    //     ) : (
+    //       <Route path="*" element={<Navigate to="/auth" replace />} />
+    //     )}
+    //   </Routes>
+    // </BrowserRouter>
     <BrowserRouter>
       <Routes>
         <Route
           path="auth/*"
           element={<Auth isLogin={isLogin} setIsLogin={setIsLogin} />}
         />
-        {isLogin ? (
-          <>
-            <Route path="/" element={<Home />} />
-            <Route path="letter-details/:id" element={<LetterDetails />} />
-            <Route path="profile" element={<Profile />} />
-          </>
-        ) : (
-          <Route path="*" element={<Navigate to="/auth" replace />} />
-        )}
+        <Route path="/" element={<Home />} />
+        <Route path="letter-details/:id" element={<LetterDetails />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

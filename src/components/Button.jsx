@@ -37,7 +37,7 @@ function Button(){
     <ButtonBox>
       {buttonText.map((item)=>{
         return(
-          <ButtonI key={item.id} alt="Character Button" onClick={()=> buttonByNameClickHandler(item) } selectedCharacterId={selectedCharacterId} buttonId={item.id}>{item.name}</ButtonI>
+          <ButtonI key={item.id} onClick={()=> buttonByNameClickHandler(item) } selectedCharacterId={selectedCharacterId} buttonId={item.id}>{item.name}</ButtonI>
         );
       })}
     </ButtonBox>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {styled} from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserIcon from './UserIcon';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 function List() {
   const letterShown = useSelector((state) => state.character);
   const letters = useSelector((state)=> state.letters);
-
+  const navigate = useNavigate();
   const filteredByNameList = letters.filter((letter)=>{
     return letterShown[letter.wroteTo];
   })
@@ -22,13 +22,7 @@ function List() {
           filteredByNameList.map((letter) => (
             <Letter
               key={letter.id}
-              to={`/letter-details/${letter.id}`}
-              state={{
-                userName: letter.userName,
-                createdAt: letter.createdAt,
-                wroteTo: letter.wroteTo,
-                message: letter.message,
-              }}
+              onClick={()=> {navigate(`/letter-details/${letter.id}`)}}
             >
               <UserIcon />
               <LetterContent>
@@ -75,7 +69,7 @@ const ListArea = styled.div`
   }
 `;
 
-const Letter = styled(Link)`
+const Letter = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

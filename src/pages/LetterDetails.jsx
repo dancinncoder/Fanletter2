@@ -13,18 +13,23 @@ function LetterDetails() {
   const dispatch = useDispatch();
   const letters = useSelector(state=>state.letters);
   const { id } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const userName = location.state.userName;
-  const createdAt = location.state.createdAt;
-  const wroteTo = location.state.wroteTo;
-  const message = location.state.message;
+  const {userName, message, createdAt, wroteTo} = letters?.find((item)=>item.id === id );
+  console.log('선택된 id', id);
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
-  const messageRef = useRef(message);
+  const navigate = useNavigate();
 
-  let filtered = letters?.find((item)=>item.id === id );
-  console.log('filtered',filtered);
+
+  // const location = useLocation();
+  // const userName = location.state.userName;
+  // const createdAt = location.state.createdAt;
+  // const wroteTo = location.state.wroteTo;
+  // const message = location.state.message;
+
+  // const messageRef = useRef(message);
+
+
+
   
   const deleteLetterHandler = () => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
@@ -41,15 +46,15 @@ function LetterDetails() {
     console.log('setIsEditing is...', isEditing);
   }
 
-  useEffect(() => {
-    // focus when it is edit mode
-    if (isEditing) {
-      const messageLength = messageRef.current.value.length;
-      messageRef.current.focus();
-      //place the location of the cursor to the last
-      messageRef.current.setSelectionRange(messageLength, messageLength);
-    }
-  }, [isEditing]);
+  // useEffect(() => {
+  //   // focus when it is edit mode
+  //   if (isEditing) {
+  //     const messageLength = messageRef.current.value.length;
+  //     messageRef.current.focus();
+  //     //place the location of the cursor to the last
+  //     messageRef.current.setSelectionRange(messageLength, messageLength);
+  //   }
+  // }, [isEditing]);
 
   const editedTypeHandler = (event) => {
     const editedSavedMessage = event.target.value;
@@ -79,7 +84,7 @@ function LetterDetails() {
       <Header/>
       <Main>
         <BtnArea>
-          <GoHomeBtn2 src={goHomeBtn2} alt="Go Home Button with Timmy Image" onClick={()=> {navigate(-1)}}></GoHomeBtn2>
+          <GoHomeBtn2 src={goHomeBtn2} onClick={()=> {navigate(-1)}}></GoHomeBtn2>
         </BtnArea>
         {isEditing? (
           <>
@@ -87,18 +92,18 @@ function LetterDetails() {
               <UserNameAndCreatedAt>
                 <UserInfo>
                   <UserIcon />
-                  <p>{filtered.userName}</p>
+                  <p>{userName}</p>
                   </UserInfo>
-                  <CreatedAt>{filtered.createdAt}</CreatedAt>
+                  <CreatedAt>{createdAt}</CreatedAt>
               </UserNameAndCreatedAt>
-              <WroteTo>To: {filtered.wroteTo}</WroteTo>
+              <WroteTo>To: {wroteTo}</WroteTo>
               <Form onSubmit={editedAddHandler}>
-                <Message><Textarea onChange={editedTypeHandler} ref={messageRef}>{filtered.message}</Textarea></Message>
+                <Message><Textarea onChange={editedTypeHandler}>{message}</Textarea></Message>
               </Form>
             </Letter>
             <EditBtnArea>
-              <Button type="submit" alt="Save Button" onClick={editedAddHandler} >Save</Button>
-              <Button alt="Cancel Button" onClick={editHandler} >Cancel</Button>
+              <Button type="submit" onClick={editedAddHandler} >Save</Button>
+              <Button onClick={editHandler} >Cancel</Button>
             </EditBtnArea>
           </>
         ) : (
@@ -107,17 +112,17 @@ function LetterDetails() {
               <UserNameAndCreatedAt>
                 <UserInfo>
                 <UserIcon />
-                  <p>{filtered.userName}</p>
+                  <p>{userName}</p>
                 </UserInfo>
-                <CreatedAt>{filtered.createdAt}</CreatedAt>
+                <CreatedAt>{createdAt}</CreatedAt>
               </UserNameAndCreatedAt>
-              <WroteTo>To: {filtered.wroteTo}</WroteTo>
-              <Message>{filtered.message}</Message>
+              <WroteTo>To: {wroteTo}</WroteTo>
+              <Message>{message}</Message>
             </Letter>
             <EditBtnArea>
-              <Button alt="Edit Button" onClick={editHandler}>Edit</Button>
-              <Button alt="Delete Button" onClick={deleteLetterHandler}>Delete</Button>
-              <Button alt="Back Button" onClick={()=> {navigate(-1)}} >Back</Button>
+              <Button onClick={editHandler}>Edit</Button>
+              <Button onClick={deleteLetterHandler}>Delete</Button>
+              <Button onClick={()=> {navigate(-1)}} >Back</Button>
             </EditBtnArea>
           </>
         )}  
