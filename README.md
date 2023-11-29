@@ -1,6 +1,6 @@
 # Fan Letter Website
 
-Building Fan Letter Website Using React
+Building Fan Letter Website Using React, Redux-Thunk
 
 ## Project Type
 
