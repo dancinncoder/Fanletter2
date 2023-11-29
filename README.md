@@ -6,11 +6,12 @@ Building Fan Letter Website Using React
 
 Individual Project
 
-##  Duration
+## Duration
 
-10/11/2023 - 20/11/2023
+29/11/2023 - 04/12/2023
 
 ## Development Environment
+
 1. React
 2. JavaScript
 3. HTML
@@ -20,6 +21,7 @@ Individual Project
 6. React Router Dom (Multiple Pages Building)
 
 ## Data Manamgement
+
 Redux
 
 ## Features
@@ -47,17 +49,19 @@ Redux
 5. Footer : Footer
 
 ## Service Overview
-![fan-letter-video-gif](https://github.com/dancinncoder/fanletter/assets/127386988/94d7afe4-443a-43fc-86fc-4573c044d67c)
 
+![fan-letter-video-gif](https://github.com/dancinncoder/fanletter/assets/127386988/94d7afe4-443a-43fc-86fc-4573c044d67c)
 
 ## Deployment
 
 Copy and paste on the web browser to check the deployment result.
+
 ```
 https://reduxfanletter.vercel.app/
 
 ```
 
 ## Built With
-* Letter icon : Icons8
-* Deployment Host : Vercel (https://vercel.com/)
+
+- Letter icon : Icons8
+- Deployment Host : Vercel (https://vercel.com/)
