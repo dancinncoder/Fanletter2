@@ -4,14 +4,6 @@ import { combineReducers } from "redux";
 import letters from "../modules/letters";
 import character from "../modules/character";
 
-// const rootReducer = combineReducers({
-//     letters,
-//     character,
-// });
-// const store = createStore(rootReducer);
-
-// export default store;
-
 // 1. create rootReducer with reducers
 const rootReducer = combineReducers({
   letters,
