@@ -21,9 +21,11 @@ function FormArea() {
     id: uuid(), userName: userName, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
   });
   const userNameHandler = (event) => {
+    console.log('username', event.target.value);
     setUserName(event.target.value);
   }
   const messageTypeHandler = (event) => {
+    console.log('username', event.target.value);
     setMessage(event.target.value);
   }
 
@@ -37,10 +39,10 @@ function FormArea() {
     setCreatedAt(formattedTime);
   },[])
 
-  const userNameRef = useRef('');
-  useEffect(()=> {
-    userNameRef.current.focus();
-  })
+  // const userNameRef = useRef(null);
+  // useEffect(()=> {
+  //   userNameRef.current.focus();
+  // })
 
   // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
    useEffect(()=> {
@@ -109,7 +111,7 @@ function FormArea() {
           <option value="Gatsby">Gatsby</option>
           <option value="Lee">Lee</option>
         </select>
-        username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'ref={userNameRef}/>
+        username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'/>
       </ToUserName>
       <MessageBox>
         message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
