@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
 import goHomeBtn2 from '../assets/gohome-icon2.png';
@@ -18,19 +18,6 @@ function LetterDetails() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
   const navigate = useNavigate();
-
-
-  // const location = useLocation();
-  // const userName = location.state.userName;
-  // const createdAt = location.state.createdAt;
-  // const wroteTo = location.state.wroteTo;
-  // const message = location.state.message;
-
-  // const messageRef = useRef(message);
-
-
-
-  
   const deleteLetterHandler = () => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
       dispatch(deleteLetter(id));
@@ -45,16 +32,6 @@ function LetterDetails() {
     setIsEditing(!isEditing);
     console.log('setIsEditing is...', isEditing);
   }
-
-  // useEffect(() => {
-  //   // focus when it is edit mode
-  //   if (isEditing) {
-  //     const messageLength = messageRef.current.value.length;
-  //     messageRef.current.focus();
-  //     //place the location of the cursor to the last
-  //     messageRef.current.setSelectionRange(messageLength, messageLength);
-  //   }
-  // }, [isEditing]);
 
   const editedTypeHandler = (event) => {
     const editedSavedMessage = event.target.value;
