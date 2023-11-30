@@ -95,8 +95,6 @@ function Auth() {
       } else {
         alert("Welcome!");
         dispatch(setIsAuthorized(auth));
-        // console.log('로그인 애프터', auth);
-        // console.log('!',dispatch(setIsAuthorized(true)));
         navigate('/');
       }
     }
@@ -131,16 +129,6 @@ function Auth() {
         }
 
       </AuthBox>
-      {/* <button onClick={()=> {
-        setIsLogin(true);
-        alert("로그인 완료");
-      }}>로그인하기</button>
-      <button onClick={()=>{
-        setIsLogin(false);
-        alert("로그아웃 완료");
-      }}>로그아웃하기</button> 
-      <button onClick={()=> {navigate("/")}}>홈</button>
-      <br /> 로그인 여부: {String(isLogin)} */}
     </OuterFrame>
   )
 }

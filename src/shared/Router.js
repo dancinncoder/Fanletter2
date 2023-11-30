@@ -6,7 +6,7 @@ import LetterDetails from "../pages/LetterDetails";
 import Profile from "pages/Profile";
 import Auth from "pages/Auth";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsAuthorized } from "redux/modules/auth";
+// import { setIsAuthorized } from "redux/modules/auth";
 
 function Router() {
   const dispatch = useDispatch();
@@ -16,15 +16,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="auth/*"
-          element={
-            <Auth
-            // isAuthorized={isAuthorized}
-            // setIsAuthorized={setIsAuthorized}
-            />
-          }
-        />
+        <Route path="auth/*" element={<Auth />} />
         {auth ? (
           <>
             <Route path="/" element={<Home />} />
