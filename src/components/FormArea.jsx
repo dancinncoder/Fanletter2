@@ -111,6 +111,7 @@ function FormArea() {
           <option value="Gatsby">Gatsby</option>
           <option value="Lee">Lee</option>
         </select>
+        {/* username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'/> */}
         username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'/>
       </ToUserName>
       <MessageBox>

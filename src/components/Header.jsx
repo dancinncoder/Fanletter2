@@ -1,18 +1,30 @@
 import React from 'react'
 import {styled} from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsAuthorized } from "redux/modules/auth";
 
 function Header() {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const signOut = () => {
+    if(window.confirm("Are you sure you want to sign out?")){
+      alert("You are signed out!");
+      dispatch(setIsAuthorized(auth));
+      localStorage.clear();
+      navigate("/auth");
+    }
+  }
 
   return (
     <HeaderArea>
       <BtnContainer>
         <HeaderBtn onClick={()=> {navigate("../")}}>Home</HeaderBtn>
         <BtnSmallContainer>
-          <HeaderBtn>Sign Out</HeaderBtn>
-          <HeaderBtn>My Profile</HeaderBtn>
+          <HeaderBtn onClick={signOut}>Sign Out</HeaderBtn>
+          <HeaderBtn onClick={()=> {navigate("/profile")}}>My Profile</HeaderBtn>
         </BtnSmallContainer>
       </BtnContainer>
     </HeaderArea>
