@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { setIsAuthorized } from "redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 function Auth() {
   const [isSigningUp, setIsSigningUp] = useState(false);
@@ -66,10 +67,38 @@ function Auth() {
     finalInputValidation();
   }
 
+  const signUpCommunication = async() => {
+    try {
+      const response = await axios.post("https://moneyfulpublicpolicy.co.kr/register", {
+        id: inputValue.id,
+        password: inputValue.password,
+        nickname: inputValue.nickname,
+        }
+      );
+      console.log('response',response);
+      if(response.data.message === "회원가입 완료"){
+          alert("Your account has been successfully created! Please sign in!");
+          setIsSigningUp(false);
+          setInputValue({
+            id: '',
+            password: '',
+            nickname: '',
+        });
+      }
+    } catch(error) {
+      console.error("회원가입중오류발생", error);
+      if(axios.isAxiosError(error) && error.response?.status === 409){
+        console.log("이미 존재하는 id 입니다.");
+        alert("The user ID that already exists.");
+      }
+    }
+  }
+
   const finalInputValidation = () => {
     const idLength = inputValue.id.length;
     const passwordLength = inputValue.password.length;
     const nicknameLength = inputValue.nickname.length;
+    //회원가입
     if(isSigningUp){
       if(idLength === 0 || passwordLength === 0 || nicknameLength === 0){
         alert("There is an unentered value.");
@@ -78,14 +107,16 @@ function Auth() {
           else if(passwordLength < 15){alert("A passwrod should be more than 4 characters");}
           else if(nicknameLength == 0){alert("A nickname should be more than 1 character");}
       } else {
-        alert("Your account has been successfully created! Please sign in.");
-        setIsSigningUp(false);
-        setInputValue({
-          id: '',
-          password: '',
-          nickname: '',
-        })
+        signUpCommunication();
+        // alert("Your account has been successfully created! Please sign in.");
+        // setIsSigningUp(false);
+        // setInputValue({
+        //   id: '',
+        //   password: '',
+        //   nickname: '',
+        // })
       }
+    //로그인
     } else {
       if(idLength === 0 || passwordLength === 0){
         alert("There is an unentered value.");
@@ -107,14 +138,12 @@ function Auth() {
       <AuthBox>
         {isSigningUp? (<AuthBoxTitle>Create Account</AuthBoxTitle> 
         ) : ( <AuthBoxTitle>Sign In</AuthBoxTitle> )}
-        {/* 로그인 여부: {String(dispatch(setIsAuthorized))} */}
         {isSigningUp? (
           <CreateAccountInputSubmitContainer onSubmit={authorizationSwitch}>
             <input onChange={(e)=> typeId(e)} value={inputValue.id} type='text' placeholder='id'/>
             <input onChange={(e) => typePassword(e)} value={inputValue.password} type='password' placeholder='password'/>
             <input onChange={(e)=>typeNickname(e)} value={inputValue.nickname} type='text' placeholder='nickname'/>
             <SignUpBtn>Create Account</SignUpBtn>
-            {/* <button onClick={()=>{setIsSigningUp(!isSigningUp)}}>Already our memeber? Log In</button> */}
             <button onClick={goToSignUpMode}>Already our memeber? Log In</button>
           </CreateAccountInputSubmitContainer>
         ) : (
@@ -122,7 +151,6 @@ function Auth() {
             <input onChange={(e)=> typeId(e)} value={inputValue.id} type='text' placeholder='id'/>
             <input onChange={(e) => typePassword(e)} value={inputValue.password} type='password' placeholder='password'/>
             <SignInBtn type="submit">Sign In</SignInBtn> 
-            {/* <button onClick={()=>{setIsSigningUp(!isSigningUp)}}>Are you new here? Create account</button> */}
             <button onClick={goToSignUpMode}>Are you new here? Create account</button>
           </SignInInputSubmitContainer>
         )
