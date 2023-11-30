@@ -1,7 +1,7 @@
 // Hooks
 import React from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
 import Header from '../components/Header';
@@ -10,25 +10,30 @@ import List from '../components/List';
 import Button from '../components/Button';
 import FormArea from '../components/FormArea';
 import picturePaul from '../assets/dune-Paul.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 function Home() {
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
 
   const letters = useSelector((state)=>{
     return state.letters;
   });
 
   const letterShown = useSelector((state)=>{
-    console.log('lettershown state character', state.character);
+    // console.log('lettershown state character', state.character);
     return state.character;
   })
 
   const filteredByName = letters.filter((letter)=>{
-    console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
-    console.log('letter.wrote =>',letter.wroteTo);
+    // console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
+    // console.log('letter.wrote =>',letter.wroteTo);
     return letterShown[letter.wroteTo];
   })
+
+  console.log('로그인여부(auth) in Home', auth);
 
   return (
     <OuterFrame>

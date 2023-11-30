@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = false;
+const accessToken = localStorage.getItem("accessToken");
+const initialState = !!accessToken; // local 토큰이 있으면, true / false
 
 const authSlice = createSlice({
   name: "auth",

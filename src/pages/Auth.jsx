@@ -101,7 +101,9 @@ function Auth() {
         password: inputValue.password,
         }
       );
-      if(response.data.success === true){
+      // if(response.data.success === true){
+      if(response.data.accessToken){
+        localStorage.setItem('accessToken', response.data.accessToken);
         alert("Welcome!");
         dispatch(setIsAuthorized(auth));
         navigate('/');
@@ -143,12 +145,11 @@ function Auth() {
           else if(passwordLength < 4){alert("A passwrod should be more than 4 characters");}
       } else {
         signInCommunication();
-        // alert("Welcome!");
       }
     }
   }
 
-        console.log('로그여부', auth);
+        console.log('로그인여부(auth) in Auth', auth);
   return (
     <OuterFrame>
       <GlobalStyle />
