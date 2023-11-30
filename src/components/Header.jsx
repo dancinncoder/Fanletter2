@@ -8,7 +8,13 @@ function Header() {
 
   return (
     <HeaderArea>
-      <GoHomeBtn onClick={()=> {navigate("../")}}>Home</GoHomeBtn>
+      <BtnContainer>
+        <HeaderBtn onClick={()=> {navigate("../")}}>Home</HeaderBtn>
+        <BtnSmallContainer>
+          <HeaderBtn>Sign Out</HeaderBtn>
+          <HeaderBtn>My Profile</HeaderBtn>
+        </BtnSmallContainer>
+      </BtnContainer>
     </HeaderArea>
   )
 }
@@ -17,24 +23,25 @@ export default Header
 
 const HeaderArea = styled.header`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
   height: 100px;
   background-color: #272727;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0 10px 0 0;
 `;
 
-const GoHomeBtn = styled.button`
-  display: block;
-  position: fixed;
-  left: 0;
-  top: 0;
+const HeaderBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   color: #ffffff;
   background-color: #272727;
-  width: 130px;
+  width: 100px;
   height: 70px;
   font-size: 1.2rem;
   margin: 10px;
@@ -47,4 +54,18 @@ const GoHomeBtn = styled.button`
   }
 `;
 
+const BtnContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 0 20px 0 0;
+`;
 
+const BtnSmallContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;

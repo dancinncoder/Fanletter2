@@ -129,7 +129,7 @@ const Main = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 100vh;
   background-color: #272727;
 `;
 
