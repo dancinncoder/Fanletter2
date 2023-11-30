@@ -1,21 +1,58 @@
-
-
 [
-  {"id": "1", "userName": "Hamin", "createdAt": "23-11-15 10:55", "message":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ", "wroteTo": "Paul" }
-  ,
-  {"id": "2", "userName": "Rose", "createdAt": "23-11-15 10:55", "message":"The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.", "wroteTo": "Paul" }
-  ,
-  {"id": "3", "userName": "Guigui", "createdAt": "23-11-15 10:55", "message":"Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.", "wroteTo": "Elio" }
-  ,
-  {"id": "4", "userName": "Tom", "createdAt": "23-11-15 10:55", "message":"Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).", "wroteTo": "Elio" }
-  ,
-  {"id": "5", "userName": "Mark", "createdAt": "23-11-15 10:55", "message":"Contrary to popular belief, Lorem Ipsum is not simply random text.", "wroteTo": "Gatsby" }
-  ,
-  {"id": "6", "userName": "Sandra", "createdAt": "23-11-15 10:55", "message":"It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", "wroteTo": "Gatsby" }
-  ,
-  {"id": "7", "userName": "Yuri", "createdAt": "23-11-15 10:55", "message":" All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. ", "wroteTo": "Lee" }
-  ,
-  {"id": "8", "userName": "Vik", "createdAt": "23-11-15 10:55", "message":" The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", "wroteTo": "Lee" }
+  {
+    "id": "1",
+    "nickname": "Hamin",
+    "createdAt": "23-11-15 10:55",
+    "message": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ",
+    "wroteTo": "Paul"
+  },
+  {
+    "id": "2",
+    "nickname": "Rose",
+    "createdAt": "23-11-15 10:55",
+    "message": "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+    "wroteTo": "Paul"
+  },
+  {
+    "id": "3",
+    "nickname": "Guigui",
+    "createdAt": "23-11-15 10:55",
+    "message": "Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
+    "wroteTo": "Elio"
+  },
+  {
+    "id": "4",
+    "nickname": "Tom",
+    "createdAt": "23-11-15 10:55",
+    "message": "Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    "wroteTo": "Elio"
+  },
+  {
+    "id": "5",
+    "nickname": "Mark",
+    "createdAt": "23-11-15 10:55",
+    "message": "Contrary to popular belief, Lorem Ipsum is not simply random text.",
+    "wroteTo": "Gatsby"
+  },
+  {
+    "id": "6",
+    "nickname": "Sandra",
+    "createdAt": "23-11-15 10:55",
+    "message": "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+    "wroteTo": "Gatsby"
+  },
+  {
+    "id": "7",
+    "nickname": "Yuri",
+    "createdAt": "23-11-15 10:55",
+    "message": " All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. ",
+    "wroteTo": "Lee"
+  },
+  {
+    "id": "8",
+    "nickname": "Vik",
+    "createdAt": "23-11-15 10:55",
+    "message": " The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+    "wroteTo": "Lee"
+  }
 ]
-
-

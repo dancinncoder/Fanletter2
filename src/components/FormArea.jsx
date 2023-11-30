@@ -6,7 +6,6 @@ import uuid from 'react-uuid';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLetter } from 'redux/modules/letters';
-import { useRef } from 'react';
 import axios from 'axios';
 
 
@@ -73,17 +72,12 @@ function FormArea() {
     const newLetter = {id: uuid(), nickname: nickname, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
     }
     console.log('입력값으로 만들어진 객체',newLetter);
-    const nicknameLength = nickname.trim().length;
+    console.log('nickname은?',nickname); //guigui 잘 찍힘
+    // const nicknameLength = nickname.trim().length;
     const messageLength = message.trim().length;
 
     // validation check
-    if (nicknameLength === 0 || messageLength === 0) {
-      alert("Please fill out the blank");
-      return;
-    } else if (nicknameLength > 20) { 
-      alert("Please write your usernmae within 20 characters.");
-      return;
-    } else if (messageLength > 100) {
+    if (messageLength > 100) {
       alert("Please write your message within 100 characters.");
       return;
     } else if (/^\s*$/.test(nickname) || /^\s*$/.test(message)) {
@@ -98,7 +92,7 @@ function FormArea() {
         return false;
       }
       // input box init
-        setNickname("");
+        // setNickname("");
         setMessage("");
     }
   }
