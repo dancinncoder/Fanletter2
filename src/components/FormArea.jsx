@@ -7,6 +7,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLetter } from 'redux/modules/letters';
 import { useRef } from 'react';
+import axios from 'axios';
 
 
 function FormArea() {
@@ -20,6 +21,12 @@ function FormArea() {
   const [formValue, setFormValue] = useState({
     id: uuid(), userName: userName, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
   });
+  const [nickname, setNickname] = useState('');
+
+  useEffect(()=>{
+    memberInfoCheck();
+  },[]);
+
   const userNameHandler = (event) => {
     console.log('username', event.target.value);
     setUserName(event.target.value);
@@ -99,6 +106,27 @@ function FormArea() {
     }
   }
 
+  const accessToken = localStorage.getItem("accessToken");
+
+  const memberInfoCheck = async() => {
+    try{
+      const response = await axios.get(`https://moneyfulpublicpolicy.co.kr/user`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+        console.log('memberInfoCheck',response);
+        setNickname(response.data.nickname);
+    } catch(error){
+      console.error("유저정보 가져오는 중 오류발생", error);
+    }
+
+
+  }
+ 
+
+
   return (
     <Form onSubmit={addHandler}>
       {console.log("letters at form area", letters)}
@@ -111,9 +139,9 @@ function FormArea() {
           <option value="Gatsby">Gatsby</option>
           <option value="Lee">Lee</option>
         </select>
+        </ToUserName>
         {/* username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'/> */}
-        username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'/>
-      </ToUserName>
+        username: {nickname}
       <MessageBox>
         message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
       </MessageBox>
