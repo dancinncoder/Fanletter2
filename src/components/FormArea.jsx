@@ -13,26 +13,27 @@ import axios from 'axios';
 function FormArea() {
   const dispatch = useDispatch();
   const letters = useSelector(state => state.letters);
-  const [userName, setUserName] = useState("");
+  // const [userName, setUserName] = useState("");
+  const [nickname, setNickname] = useState('');
   const [message, setMessage] = useState("");
   const [wroteTo, setWroteTo] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState("Paul");
   const [createdAt, setCreatedAt] = useState("");
   const [formValue, setFormValue] = useState({
-    id: uuid(), userName: userName, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
+    id: uuid(), nickname: nickname, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
   });
-  const [nickname, setNickname] = useState('');
+
 
   useEffect(()=>{
     memberInfoCheck();
   },[]);
 
-  const userNameHandler = (event) => {
-    console.log('username', event.target.value);
-    setUserName(event.target.value);
+  const nicknameHandler = (event) => {
+    console.log('nickname', event.target.value);
+    setNickname(event.target.value);
   }
   const messageTypeHandler = (event) => {
-    console.log('username', event.target.value);
+    console.log('nickname', event.target.value);
     setMessage(event.target.value);
   }
 
@@ -46,10 +47,6 @@ function FormArea() {
     setCreatedAt(formattedTime);
   },[])
 
-  // const userNameRef = useRef(null);
-  // useEffect(()=> {
-  //   userNameRef.current.focus();
-  // })
 
   // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
    useEffect(()=> {
@@ -73,23 +70,23 @@ function FormArea() {
   // NEW LETTER ADD
   const addHandler = (event) => {
     event.preventDefault();
-    const newLetter = {id: uuid(), userName: userName, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
+    const newLetter = {id: uuid(), nickname: nickname, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
     }
     console.log('입력값으로 만들어진 객체',newLetter);
-    const userNameLength = userName.trim().length;
+    const nicknameLength = nickname.trim().length;
     const messageLength = message.trim().length;
 
     // validation check
-    if (userNameLength === 0 || messageLength === 0) {
+    if (nicknameLength === 0 || messageLength === 0) {
       alert("Please fill out the blank");
       return;
-    } else if (userNameLength > 20) { 
+    } else if (nicknameLength > 20) { 
       alert("Please write your usernmae within 20 characters.");
       return;
     } else if (messageLength > 100) {
       alert("Please write your message within 100 characters.");
       return;
-    } else if (/^\s*$/.test(userName) || /^\s*$/.test(message)) {
+    } else if (/^\s*$/.test(nickname) || /^\s*$/.test(message)) {
       alert("Only spaces have been entered.");
       return;
     } else {
@@ -101,13 +98,12 @@ function FormArea() {
         return false;
       }
       // input box init
-        setUserName("");
+        setNickname("");
         setMessage("");
     }
   }
 
   const accessToken = localStorage.getItem("accessToken");
-
   const memberInfoCheck = async() => {
     try{
       const response = await axios.get(`https://moneyfulpublicpolicy.co.kr/user`, {
@@ -117,12 +113,12 @@ function FormArea() {
         },
       });
         console.log('memberInfoCheck',response);
-        setNickname(response.data.nickname);
+        const {id, nickname, success, avatar} = response.data;
+        setNickname(nickname);
+
     } catch(error){
       console.error("유저정보 가져오는 중 오류발생", error);
     }
-
-
   }
  
 
@@ -131,7 +127,7 @@ function FormArea() {
     <Form onSubmit={addHandler}>
       {console.log("letters at form area", letters)}
       {/* 데이터 들어오는거 확인 */}
-      <ToUserName>
+      <ToNickname>
         {/* name은 옵션값의 Key 명이 될 이름이다. */}
         To...<select name="wroteTo" value={letters.wroteTo}  onChange={selectHandler}>
           <option value="Paul">Paul</option>
@@ -139,9 +135,8 @@ function FormArea() {
           <option value="Gatsby">Gatsby</option>
           <option value="Lee">Lee</option>
         </select>
-        </ToUserName>
-        {/* username: <UserNameInput type="text" value={userName} onChange={userNameHandler} placeholder='max 20 characters'/> */}
-        username: {nickname}
+        </ToNickname>
+        nickname: {nickname}
       <MessageBox>
         message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
       </MessageBox>
@@ -174,7 +169,7 @@ const MessageInput = styled.input`
  border: none;
 `;
 
-const UserNameInput = styled.input`
+const NicknameInput = styled.input`
  width: 100%;
  border: none;
 `;
@@ -195,7 +190,7 @@ const SendButton = styled.button`
  }
 `;
 
-const ToUserName = styled.div`
+const ToNickname = styled.div`
  display: flex;
  flex-direction: row;
  justify-content: flex-start;
