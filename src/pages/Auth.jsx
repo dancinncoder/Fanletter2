@@ -94,6 +94,31 @@ function Auth() {
     }
   }
 
+  const signInCommunication = async() => {
+    try{
+      const response = await axios.post("https://moneyfulpublicpolicy.co.kr/login", {
+        id: inputValue.id,
+        password: inputValue.password,
+        }
+      );
+      if(response.data.success === true){
+        alert("Welcome!");
+        dispatch(setIsAuthorized(auth));
+        navigate('/');
+      }
+    } catch(error){
+      console.error("로그인중오류발생", error);
+      if(axios.isAxiosError(error) && error.response?.status == 401){
+        console.log("존재하지 않는 유저입니다.");
+        alert("This account doesn't exist. Please try again.");
+        setInputValue({
+          id: '',
+          password: '',
+      });
+      }
+    }
+  }
+
   const finalInputValidation = () => {
     const idLength = inputValue.id.length;
     const passwordLength = inputValue.password.length;
@@ -108,13 +133,6 @@ function Auth() {
           else if(nicknameLength == 0){alert("A nickname should be more than 1 character");}
       } else {
         signUpCommunication();
-        // alert("Your account has been successfully created! Please sign in.");
-        // setIsSigningUp(false);
-        // setInputValue({
-        //   id: '',
-        //   password: '',
-        //   nickname: '',
-        // })
       }
     //로그인
     } else {
@@ -124,9 +142,8 @@ function Auth() {
         if(idLength < 4){alert("A id should be more than 4 characters");}
           else if(passwordLength < 4){alert("A passwrod should be more than 4 characters");}
       } else {
-        alert("Welcome!");
-        dispatch(setIsAuthorized(auth));
-        navigate('/');
+        signInCommunication();
+        // alert("Welcome!");
       }
     }
   }
