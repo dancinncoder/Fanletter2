@@ -7,6 +7,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLetter } from 'redux/modules/letters';
 import axios from 'axios';
+import { setUser } from 'redux/modules/user';
 
 
 function FormArea() {
@@ -21,7 +22,7 @@ function FormArea() {
   const [formValue, setFormValue] = useState({
     id: uuid(), nickname: nickname, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
   });
-
+  const user = useSelector((state)=> state.user);
 
   useEffect(()=>{
     memberInfoCheck();
@@ -112,8 +113,9 @@ function FormArea() {
         localStorage.setItem('nickname', nickname);
         localStorage.setItem('success', success);
         localStorage.setItem('avatar', avatar);
-        setNickname(nickname); // 이걸 리듀서로 바꿔줘야...?
-
+        // setNickname(nickname); // 이걸 리듀서로 바꿔줘야...?
+        dispatch(setUser(response.data));
+        console.log('response.data',response.data);
     } catch(error){
       console.error("유저정보 가져오는 중 오류발생", error);
     }
@@ -134,7 +136,7 @@ function FormArea() {
           <option value="Lee">Lee</option>
         </select>
         </ToNickname>
-        nickname: {nickname}
+        nickname: {user.nickname}
       <MessageBox>
         message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
       </MessageBox>
@@ -206,4 +208,3 @@ const MessageBox = styled.div`
  gap: 10px;
  margin: 2px 20px 2px 20px;
 `;
-

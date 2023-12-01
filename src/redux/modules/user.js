@@ -14,8 +14,8 @@ const avatar = localStorage.getItem("avatar");
 const initialState = {
   id: id,
   nickname: nickname,
-  avatar: avatar,
-  success: success,
+  avatar: success,
+  success: avatar,
   accessToken: accessToken,
 };
 
@@ -23,11 +23,11 @@ const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    editUser: (state, action) => {
-      return action.payload;
+    setUser: (state, action) => {
+      return { ...state, ...action.payload };
     },
   },
 });
 
-export const { editUser } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 export default userSlice.reducer;
