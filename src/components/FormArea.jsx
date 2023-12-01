@@ -108,7 +108,11 @@ function FormArea() {
       });
         console.log('memberInfoCheck',response);
         const {id, nickname, success, avatar} = response.data;
-        setNickname(nickname);
+        localStorage.setItem('id', id);
+        localStorage.setItem('nickname', nickname);
+        localStorage.setItem('success', success);
+        localStorage.setItem('avatar', avatar);
+        setNickname(nickname); // 이걸 리듀서로 바꿔줘야...?
 
     } catch(error){
       console.error("유저정보 가져오는 중 오류발생", error);
