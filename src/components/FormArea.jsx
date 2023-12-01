@@ -28,10 +28,10 @@ function FormArea() {
     memberInfoCheck();
   },[]);
 
-  const nicknameHandler = (event) => {
-    console.log('nickname', event.target.value);
-    setNickname(event.target.value);
-  }
+  // const nicknameHandler = (event) => {
+  //   console.log('nickname', event.target.value);
+  //   setNickname(event.target.value);
+  // }
   const messageTypeHandler = (event) => {
     console.log('nickname', event.target.value);
     setMessage(event.target.value);
@@ -70,7 +70,7 @@ function FormArea() {
   // NEW LETTER ADD
   const addHandler = (event) => {
     event.preventDefault();
-    const newLetter = {id: uuid(), nickname: nickname, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
+    const newLetter = {id: uuid(), nickname: user.nickname, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
     }
     console.log('입력값으로 만들어진 객체',newLetter);
     console.log('nickname은?',nickname); //guigui 잘 찍힘
@@ -81,7 +81,7 @@ function FormArea() {
     if (messageLength > 100) {
       alert("Please write your message within 100 characters.");
       return;
-    } else if (/^\s*$/.test(nickname) || /^\s*$/.test(message)) {
+    } else if (/^\s*$/.test(message)) {
       alert("Only spaces have been entered.");
       return;
     } else {

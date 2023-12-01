@@ -12,24 +12,7 @@ function List() {
   const filteredByNameList = letters.filter((letter)=>{
     return letterShown[letter.wroteTo];
   })
-
-  // const accessToken = localStorage.getItem("accessToken");
-  // const memberInfoCheck = async() => {
-  //   try{
-  //     const response = await axios.get(`https://moneyfulpublicpolicy.co.kr/user`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     });
-  //       console.log('memberInfoCheck',response);
-  //       const {id, nickname, success, avatar} = response.data;
-  //       setNickname(nickname);
-
-  //   } catch(error){
-  //     console.error("유저정보 가져오는 중 오류발생", error);
-  //   }
-  // }
+  // const user = useSelector((state)=> state.user);
 
   return (
     <ListOuterFrame>
