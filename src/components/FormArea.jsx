@@ -5,9 +5,10 @@ import { useEffect } from 'react';
 import uuid from 'react-uuid';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { addLetter } from 'redux/modules/letters';
+import { __addNewLetter, addLetter } from 'redux/modules/letters';
 import axios from 'axios';
 import { setUser } from 'redux/modules/user';
+import { __getLetters } from 'redux/modules/letters';
 
 
 function FormArea() {
@@ -90,7 +91,8 @@ function FormArea() {
       return;
     } else {
       if(window.confirm("Are you sure you want to send the letter?") === true){
-        dispatch(addLetter(newLetter));
+        dispatch(__addNewLetter(newLetter));
+        // dispatch(addLetter(newLetter));
         // setLetters([...letters, newLetter]);
         alert("Your letter has been successfully sent!");
       } else {
@@ -125,6 +127,9 @@ function FormArea() {
     }
   }
  
+  useEffect(()=> {
+    dispatch(__getLetters());
+  },[dispatch]);
 
 
   return (

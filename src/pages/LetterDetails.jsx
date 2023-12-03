@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import GlobalStyle from '../GlobalStyle';
@@ -7,20 +7,25 @@ import UserIcon from '../components/UserIcon';
 import Header from 'components/Header';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteLetter, editLetter } from 'redux/modules/letters';
+import { __deleteLetter, __editLetter, __getLetters, deleteLetter, editLetter } from 'redux/modules/letters';
 
 function LetterDetails() {
   const dispatch = useDispatch();
   const letters = useSelector(state=>state.letters);
   const { id } = useParams();
-  const {nickname, content, createdAt, wroteTo} = letters?.find((item)=>item.id === id );
+  console.log('letters in detail page', letters);
+  // const {nickname, content, createdAt, wroteTo} = letters?.find((item)=>item.id === id );
+  const { nickname, content, createdAt, wroteTo } = letters && letters.letters.find((item) => item.id === id) || {};
+
   console.log('선택된 id', id);
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
   const navigate = useNavigate();
+
   const deleteLetterHandler = () => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
-      dispatch(deleteLetter(id));
+      dispatch(__deleteLetter(id));
+      // dispatch(deleteLetter(id));
       alert("your letter has been successfully deleted!");
       navigate("../");
     } else {
@@ -45,7 +50,8 @@ function LetterDetails() {
       alert("There is no any change");
     } else {
       if(window.confirm("Are you sure you want to save the changes?") === true) {
-        dispatch(editLetter({id, editedContent}));
+        dispatch(__editLetter({id, editedContent}));
+        // dispatch(editLetter({id, editedContent}));
         alert("Your changes has been successfully updated!");
         setIsEditing(false);
       } else {
@@ -54,6 +60,10 @@ function LetterDetails() {
     }
 
   };
+
+  useEffect(()=> {
+    dispatch(__getLetters());
+  },[dispatch]);
 
   return (
     <div>

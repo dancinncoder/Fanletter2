@@ -11,6 +11,7 @@ import Button from '../components/Button';
 import FormArea from '../components/FormArea';
 import picturePaul from '../assets/dune-Paul.png';
 import { useDispatch, useSelector } from 'react-redux';
+// import { __getLetters } from 'redux/modules/letters';
 
 
 
@@ -27,11 +28,15 @@ function Home() {
     return state.character;
   })
 
-  const filteredByName = letters.filter((letter)=>{
+  const filteredByName = letters.letters ? letters.letters.filter((letter)=>{
     // console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
     // console.log('letter.wrote =>',letter.wroteTo);
     return letterShown[letter.wroteTo];
-  })
+  }) : [];
+
+  // useEffect(()=> {
+  //   dispatch(__getLetters());
+  // },[dispatch]);
 
   console.log('로그인여부(auth) in Home', auth);
 
