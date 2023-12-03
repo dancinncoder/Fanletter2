@@ -1,5 +1,5 @@
 // Hooks
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -13,14 +13,14 @@ import picturePaul from '../assets/dune-Paul.png';
 import { useDispatch, useSelector } from 'react-redux';
 
 
+
 function Home() {
+
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
-  const letters = useSelector((state)=>{
-    return state.letters;
-  });
+  const letters = useSelector((state)=>state.letters);
 
   const letterShown = useSelector((state)=>{
     // console.log('lettershown state character', state.character);

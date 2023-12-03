@@ -15,14 +15,17 @@ function FormArea() {
   const letters = useSelector(state => state.letters);
   // const [userName, setUserName] = useState("");
   const [nickname, setNickname] = useState('');
-  const [message, setMessage] = useState("");
+  const [content, setContent] = useState("");
   const [wroteTo, setWroteTo] = useState("");
+  const [userId, setUserId] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState("Paul");
   const [createdAt, setCreatedAt] = useState("");
-  const [formValue, setFormValue] = useState({
-    id: uuid(), nickname: nickname, createdAt, message: message, wroteTo: selectedCharacter, character: selectedCharacter,
-  });
   const user = useSelector((state)=> state.user);
+  const [formValue, setFormValue] = useState({
+    id: uuid(), nickname: nickname, createdAt, content: content, wroteTo: selectedCharacter, character: selectedCharacter, userId: user.id, avatar: avatar,
+  });
+
 
   useEffect(()=>{
     memberInfoCheck();
@@ -32,9 +35,9 @@ function FormArea() {
   //   console.log('nickname', event.target.value);
   //   setNickname(event.target.value);
   // }
-  const messageTypeHandler = (event) => {
+  const contentTypeHandler = (event) => {
     console.log('nickname', event.target.value);
-    setMessage(event.target.value);
+    setContent(event.target.value);
   }
 
   const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -70,18 +73,19 @@ function FormArea() {
   // NEW LETTER ADD
   const addHandler = (event) => {
     event.preventDefault();
-    const newLetter = {id: uuid(), nickname: user.nickname, createdAt: moment().format('YY-MM-DD HH:mm'), message: message, wroteTo: selectedCharacter,
+    const newLetter = {id: uuid(), nickname: user.nickname, createdAt: moment().format('YY-MM-DD HH:mm'), content: content, wroteTo: selectedCharacter, userId: user.id, avatar: avatar,
     }
+    console.log('userId는 로그인할때 쓴 아이디이다.', user.id);
     console.log('입력값으로 만들어진 객체',newLetter);
     console.log('nickname은?',nickname); //guigui 잘 찍힘
     // const nicknameLength = nickname.trim().length;
-    const messageLength = message.trim().length;
+    const contentLength = content.trim().length;
 
     // validation check
-    if (messageLength > 100) {
+    if (contentLength > 100) {
       alert("Please write your message within 100 characters.");
       return;
-    } else if (/^\s*$/.test(message)) {
+    } else if (/^\s*$/.test(content)) {
       alert("Only spaces have been entered.");
       return;
     } else {
@@ -94,7 +98,7 @@ function FormArea() {
       }
       // input box init
         // setNickname("");
-        setMessage("");
+        setContent("");
     }
   }
 
@@ -137,9 +141,9 @@ function FormArea() {
         </select>
         </ToNickname>
         nickname: {user.nickname}
-      <MessageBox>
-        message: <MessageInput type="text" value={message} onChange={messageTypeHandler} placeholder='max 100 characters'/>
-      </MessageBox>
+      <ContentBox>
+        message: <ContentInput type="text" value={content} onChange={contentTypeHandler} placeholder='max 100 characters'/>
+      </ContentBox>
     <SendButton type="submit">Send</SendButton>
   </Form>
   )
@@ -164,7 +168,7 @@ function FormArea() {
  padding: 10px;
 `;
 
-const MessageInput = styled.input`
+const ContentInput = styled.input`
  width: 90%;
  border: none;
 `;
@@ -201,7 +205,7 @@ const ToNickname = styled.div`
  margin: 2px 20px 2px 20px;
 `;
 
-const MessageBox = styled.div`
+const ContentBox = styled.div`
  display: flex;
  flex-direction: row;
  justify-content: start;

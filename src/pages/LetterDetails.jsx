@@ -13,10 +13,10 @@ function LetterDetails() {
   const dispatch = useDispatch();
   const letters = useSelector(state=>state.letters);
   const { id } = useParams();
-  const {userName, message, createdAt, wroteTo} = letters?.find((item)=>item.id === id );
+  const {nickname, content, createdAt, wroteTo} = letters?.find((item)=>item.id === id );
   console.log('선택된 id', id);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedMessage, setEditedMessage] = useState(message);
+  const [editedContent, setEditedContent] = useState(content);
   const navigate = useNavigate();
   const deleteLetterHandler = () => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
@@ -34,18 +34,18 @@ function LetterDetails() {
   }
 
   const editedTypeHandler = (event) => {
-    const editedSavedMessage = event.target.value;
-    setEditedMessage(editedSavedMessage);
+    const editedSavedContent = event.target.value;
+    setEditedContent(editedSavedContent);
   }
 
   const editedAddHandler = (event) => {
     event.preventDefault();
     // validation check
-    if(message === editedMessage){
+    if(content === editedContent){
       alert("There is no any change");
     } else {
       if(window.confirm("Are you sure you want to save the changes?") === true) {
-        dispatch(editLetter({id, editedMessage}));
+        dispatch(editLetter({id, editedContent}));
         alert("Your changes has been successfully updated!");
         setIsEditing(false);
       } else {
@@ -66,16 +66,16 @@ function LetterDetails() {
         {isEditing? (
           <>
             <Letter>
-              <UserNameAndCreatedAt>
+              <NicknameAndCreatedAt>
                 <UserInfo>
                   <UserIcon />
-                  <p>{userName}</p>
+                  <p>{nickname}</p>
                   </UserInfo>
                   <CreatedAt>{createdAt}</CreatedAt>
-              </UserNameAndCreatedAt>
+              </NicknameAndCreatedAt>
               <WroteTo>To: {wroteTo}</WroteTo>
               <Form onSubmit={editedAddHandler}>
-                <Message><Textarea onChange={editedTypeHandler}>{message}</Textarea></Message>
+                <Content><Textarea onChange={editedTypeHandler}>{content}</Textarea></Content>
               </Form>
             </Letter>
             <EditBtnArea>
@@ -86,15 +86,15 @@ function LetterDetails() {
         ) : (
           <>
             <Letter>
-              <UserNameAndCreatedAt>
+              <NicknameAndCreatedAt>
                 <UserInfo>
                 <UserIcon />
-                  <p>{userName}</p>
+                  <p>{nickname}</p>
                 </UserInfo>
                 <CreatedAt>{createdAt}</CreatedAt>
-              </UserNameAndCreatedAt>
+              </NicknameAndCreatedAt>
               <WroteTo>To: {wroteTo}</WroteTo>
-              <Message>{message}</Message>
+              <Content>{content}</Content>
             </Letter>
             <EditBtnArea>
               <Button onClick={editHandler}>Edit</Button>
@@ -195,7 +195,7 @@ const Button = styled.button`
 
 export default LetterDetails
 
-const UserNameAndCreatedAt = styled.div`
+const NicknameAndCreatedAt = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -229,7 +229,7 @@ const WroteTo = styled.p`
   color: #e49090;
 `;
 
-const Message = styled.p`
+const Content = styled.p`
   align-self: flex-start;
   width: 93%;
   height: 150px;

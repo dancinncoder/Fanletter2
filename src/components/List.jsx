@@ -30,7 +30,7 @@ function List() {
                 <Nickname>{letter.nickname}</Nickname>
                 <p>{letter.createdAt}</p>
                 <span>{letter.wroteTo},&nbsp;</span>
-                <Message>{letter.message}</Message>
+                <Content>{letter.content}</Content>
               </LetterContent>
             </Letter>
           ))
@@ -92,7 +92,7 @@ const Letter = styled.div`
   }
 `;
 
-const Message = styled.span`
+const Content = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;  
