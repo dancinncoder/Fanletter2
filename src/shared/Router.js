@@ -17,7 +17,6 @@ function Router() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
-  console.log("로그인상태(auth) in Router", auth);
   return (
     <BrowserRouter>
       <Routes>
@@ -32,12 +31,6 @@ function Router() {
           <Route path="*" element={<Navigate to="/auth" replace />} />
         )}
       </Routes>
-      {/* <Routes>
-        <Route path="auth/*" element={<Auth />} />
-        <Route path="/" element={<Home />} />
-        <Route path="letter-details/:id" element={<LetterDetails />} />
-        <Route path="profile" element={<Profile />} />
-      </Routes> */}
     </BrowserRouter>
   );
 }

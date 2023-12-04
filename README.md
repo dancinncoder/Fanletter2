@@ -22,7 +22,7 @@ Individual Project
 
 ## Data Manamgement
 
-Redux
+Redux (toolkit)
 
 ## Features
 
@@ -32,6 +32,8 @@ Redux
 4. Edit Fan Letter
 5. View Fan Letter Lists Categorized by Movie Character of Timothee Chalamet Played in Roles
 6. Reload through the main logo onclick
+7. Sign-in, Sing-up, Sing-out
+8. My profile
 
 ## Requirement
 
@@ -50,14 +52,12 @@ Redux
 
 ## Service Overview
 
-![fan-letter-video-gif](https://github.com/dancinncoder/fanletter/assets/127386988/94d7afe4-443a-43fc-86fc-4573c044d67c)
-
 ## Deployment
 
 Copy and paste on the web browser to check the deployment result.
 
 ```
-https://reduxfanletter.vercel.app/
+
 
 ```
 

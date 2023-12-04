@@ -12,7 +12,6 @@ function Footer() {
 export default Footer
 
 const FooterArea = styled.footer`
-  /* display: flex;
-  margin: 0 0 0 0; */
+
 `;
 

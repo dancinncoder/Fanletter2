@@ -8,15 +8,10 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 function List() {
   const letterShown = useSelector((state) => state.character);
   const letters = useSelector((state)=> state.letters);
-  console.log('letters in formarea', letters);
   const navigate = useNavigate();
-  // const filteredByNameList = letters.letters.filter((letter)=>{
-  //   return letterShown[letter.wroteTo];
-  // })
   const filteredByNameList = letters && letters.letters ? letters.letters.filter((letter) => {
     return letterShown[letter.wroteTo];
   }) : [];
-  // const user = useSelector((state)=> state.user);
 
   return (
     <ListOuterFrame>

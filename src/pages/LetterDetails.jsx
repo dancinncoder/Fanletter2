@@ -13,11 +13,7 @@ function LetterDetails() {
   const dispatch = useDispatch();
   const letters = useSelector(state=>state.letters);
   const { id } = useParams();
-  console.log('letters in detail page', letters);
-  // const {nickname, content, createdAt, wroteTo} = letters?.find((item)=>item.id === id );
   const { nickname, content, createdAt, wroteTo } = letters && letters.letters.find((item) => item.id === id) || {};
-
-  console.log('선택된 id', id);
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
   const navigate = useNavigate();
@@ -25,7 +21,6 @@ function LetterDetails() {
   const deleteLetterHandler = () => {
     if(window.confirm("Are you sure you want to delete the letter?") === true){
       dispatch(__deleteLetter(id));
-      // dispatch(deleteLetter(id));
       alert("your letter has been successfully deleted!");
       navigate("../");
     } else {
@@ -35,7 +30,6 @@ function LetterDetails() {
 
   const editHandler = () => {
     setIsEditing(!isEditing);
-    console.log('setIsEditing is...', isEditing);
   }
 
   const editedTypeHandler = (event) => {

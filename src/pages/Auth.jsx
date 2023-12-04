@@ -75,7 +75,7 @@ function Auth() {
         nickname: inputValue.nickname,
         }
       );
-      console.log('response',response);
+
       if(response.data.message === "회원가입 완료"){
           alert("Your account has been successfully created! Please sign in!");
           setIsSigningUp(false);
@@ -149,7 +149,6 @@ function Auth() {
     }
   }
 
-        console.log('로그인여부(auth) in Auth', auth);
   return (
     <OuterFrame>
       <GlobalStyle />

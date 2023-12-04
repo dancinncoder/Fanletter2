@@ -11,34 +11,21 @@ import Button from '../components/Button';
 import FormArea from '../components/FormArea';
 import picturePaul from '../assets/dune-Paul.png';
 import { useDispatch, useSelector } from 'react-redux';
-// import { __getLetters } from 'redux/modules/letters';
+
 
 
 
 function Home() {
 
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
-
   const letters = useSelector((state)=>state.letters);
-
   const letterShown = useSelector((state)=>{
-    // console.log('lettershown state character', state.character);
     return state.character;
   })
 
   const filteredByName = letters.letters ? letters.letters.filter((letter)=>{
-    // console.log('카테고리뭐눌렀냐',letterShown[letter.wroteTo]);
-    // console.log('letter.wrote =>',letter.wroteTo);
     return letterShown[letter.wroteTo];
   }) : [];
-
-  // useEffect(()=> {
-  //   dispatch(__getLetters());
-  // },[dispatch]);
-
-  console.log('로그인여부(auth) in Home', auth);
 
   return (
     <OuterFrame>
@@ -52,7 +39,6 @@ function Home() {
           <h1>Send My Letter</h1>
           <p><i>Send a letter to one of characters that Timothée's played in roles !</i></p>
           <FormArea />
-          {/* <List letters={filteredByName}/> */}
           <List />
         </LetterInputOutputArea>
         <Button />

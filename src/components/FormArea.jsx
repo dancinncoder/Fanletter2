@@ -14,7 +14,6 @@ import { __getLetters } from 'redux/modules/letters';
 function FormArea() {
   const dispatch = useDispatch();
   const letters = useSelector(state => state.letters);
-  // const [userName, setUserName] = useState("");
   const [nickname, setNickname] = useState('');
   const [content, setContent] = useState("");
   const [wroteTo, setWroteTo] = useState("");
@@ -32,12 +31,7 @@ function FormArea() {
     memberInfoCheck();
   },[]);
 
-  // const nicknameHandler = (event) => {
-  //   console.log('nickname', event.target.value);
-  //   setNickname(event.target.value);
-  // }
   const contentTypeHandler = (event) => {
-    console.log('nickname', event.target.value);
     setContent(event.target.value);
   }
 
@@ -55,7 +49,6 @@ function FormArea() {
   // SEND THE DEFAULT VALUE OF SELECTION 'PAUL' FOR THE FIRST TIME WHEN LOADING THE INITIAL SCREEN
    useEffect(()=> {
     setFormValue(selectedCharacter);
-    console.log('최초 selected name is :',selectedCharacter);
   },[]);
 
   // SELECTING OPTION SETTING
@@ -76,10 +69,7 @@ function FormArea() {
     event.preventDefault();
     const newLetter = {id: uuid(), nickname: user.nickname, createdAt: moment().format('YY-MM-DD HH:mm'), content: content, wroteTo: selectedCharacter, userId: user.id, avatar: avatar,
     }
-    console.log('userId는 로그인할때 쓴 아이디이다.', user.id);
-    console.log('입력값으로 만들어진 객체',newLetter);
-    console.log('nickname은?',nickname); //guigui 잘 찍힘
-    // const nicknameLength = nickname.trim().length;
+
     const contentLength = content.trim().length;
 
     // validation check
@@ -113,13 +103,12 @@ function FormArea() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-        console.log('memberInfoCheck',response);
+
         const {id, nickname, success, avatar} = response.data;
         localStorage.setItem('id', id);
         localStorage.setItem('nickname', nickname);
         localStorage.setItem('success', success);
         localStorage.setItem('avatar', avatar);
-        // setNickname(nickname); // 이걸 리듀서로 바꿔줘야...?
         dispatch(setUser(response.data));
         console.log('response.data',response.data);
     } catch(error){
@@ -134,10 +123,7 @@ function FormArea() {
 
   return (
     <Form onSubmit={addHandler}>
-      {console.log("letters at form area", letters)}
-      {/* 데이터 들어오는거 확인 */}
       <ToNickname>
-        {/* name은 옵션값의 Key 명이 될 이름이다. */}
         To...<select name="wroteTo" value={letters.wroteTo}  onChange={selectHandler}>
           <option value="Paul">Paul</option>
           <option value="Elio">Elio</option>
